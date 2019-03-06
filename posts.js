@@ -1,23 +1,24 @@
 const fs = require('fs');
+const admin = require('firebase-admin');
+var serviceAccount= require('./serviceAccount.json');
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://degas-blog.firebaseio.com"
+});
 
 var postList = [];
 
-fs.readFile("posts.txt", function(err, data){
-    if(err){
-        console.log(err);
 
-    }
-    else{
-        var json = [];
-        try {
-            json = JSON.parse(data);
-            
-        } catch (error) {
-
-        }
-        postList = json;
+var db = admin.database();
+var ref = db.ref("posts");
+ref.once("value", function(snapshot){
+    console.log(snapshot.val());
+    if(snapshot.val()){
+        postList = snapshot.val()
     }
 });
+
+
 
 
 
@@ -31,11 +32,6 @@ module.exports = function(app){
     app.post('/api/addPost', (req, res) => {
         postList.unshift(req.body);
         res.send({posts: postList});
-
-        fs.writeFile("posts.txt", JSON.stringify(postList), function(err){
-            if(err){
-                console.log(err);
-            }
-        });
+        ref.set(postList);
     });
 }
