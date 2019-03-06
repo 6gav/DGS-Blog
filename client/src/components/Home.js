@@ -82,7 +82,7 @@ function UserPosts(props){
         var component = (
         <div key={i} className='Post-holder'>
             <p className='Post-title'>{postList[i].title}</p>    
-            <p className='Post-poster'>by {postList[i].poster}</p>    
+            <p className='Post-poster'>by {postList[i].poster} on {postList[i].date}</p>    
             <p className='Post-body'>{postList[i].body}</p>    
         </div>)
         posts.push(component);

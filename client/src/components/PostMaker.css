@@ -38,6 +38,7 @@ input[type=radio]{
     border-style: none;
 
     font-size: inherit;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .Submit-body{

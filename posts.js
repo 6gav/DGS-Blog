@@ -30,8 +30,34 @@ module.exports = function(app){
     });
 
     app.post('/api/addPost', (req, res) => {
-        postList.unshift(req.body);
-        res.send({posts: postList});
+        
+        //Current date
+        var date = new Date();
+        
+        
+        //Format date
+        
+        var year, month, day;
+        
+        year  =  '' +  date.getFullYear();
+        month =  '' + (date.getMonth() + 1);
+        day   =  '' +  date.getDate();
+        if(month.length < 2){
+            month = '0'+month;
+        }
+        
+        if(day.length < 2){
+            day = '0'+day;
+        }
+        
+        var dateString = month + '-' + day + '-' + year;
+        var post = req.body;
+        req.body.date = dateString;
+        
+        //Put post in list
+        postList.unshift(post);
+        
+        res.send({error: 0});
         ref.set(postList);
     });
 }

@@ -91,6 +91,16 @@ class PostMaker extends Component {
                 },
             body: JSON.stringify({title: title, body: body, poster: poster}),
         })
+        .then(res => res.json())
+        .then(res => {
+            if(res.error === 0){
+                window.location = '/';
+            }
+            else
+            {
+                this.setState({error: res.error});
+            }
+        });
     }
 
     HandleChange(e){

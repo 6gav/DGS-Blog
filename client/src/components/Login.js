@@ -25,6 +25,7 @@ class Login extends Component {
                     <input type='password' placeholder='Password' onChange={e => this.setState({password: e.target.value})} style={{width: '10vw', padding: 0}}/>
                     <input type='submit' value='Login' style={{width: '10vw', height: '2vh'}}/>
 
+                    <p style={{fontSize: '0.8em', color: 'red'}} >{this.state.error}</p>
                 </form>
             </div>
         );
@@ -42,8 +43,14 @@ class Login extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log(res);
             localStorage.setItem('authcode', res.auth);
+            console.log(res);
+            if(res.auth == -1){
+                this.setState({error: 'Invalid username/password'});
+                return;
+            }
+
+            window.location = '/';
         });
     }
 
