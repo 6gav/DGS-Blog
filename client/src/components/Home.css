@@ -1,0 +1,43 @@
+.Home-background{
+    background-image: url('./img/background.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(calc(0.3vh + 0.1vw));
+    min-height: 102vh;
+    min-width: 102vw;
+    
+    position: fixed;
+    top: -1vh;
+    left: -1vw;
+    z-index: -1;
+}
+
+
+.Post-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.Post-holder{
+    width: 40vw;
+    min-height: 5vh;
+    border: 0.2em gray;
+    border-style: ridge;
+    box-shadow: 0.1em 0.1em 1em;
+    font-size: calc(1.5vh + 0.5vw); 
+    padding: 0.5em;
+    margin: 1em;
+    background-color: rgba(241, 241, 241, 0.9);
+}
+.Post-title{
+    margin: 0;
+}
+.Post-poster{
+    font-size: calc(0.5vh + 0.3vw);
+    margin-top: -0.2em;
+    margin-left: 0.1em;
+    color: rgb(85, 85, 85);
+}
+.Post-body{
+    margin: 0;
+}
