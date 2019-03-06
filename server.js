@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 const routes = require('./routes.js')(app);
 
-
+const authentication = require('./auth.js')(app);
 
 
 //Return react app in production

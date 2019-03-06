@@ -20,6 +20,7 @@ class Home extends Component {
     render() {
         return (
             <div className='Home'>
+                <a href='/admin/login' style={{opacity: 0, 'font-size': 'calc(1vh + 0.5vw)'}}>Login</a>
                 <UserPosts postList={this.state.postList}/>
                 <div className='Home-background'></div>
             </div>
