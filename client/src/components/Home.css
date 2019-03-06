@@ -18,6 +18,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .Post-holder{
     width: 40vw;
     min-height: 5vh;
@@ -29,15 +30,19 @@
     margin: 1em;
     background-color: rgba(241, 241, 241, 0.9);
 }
+
 .Post-title{
     margin: 0;
 }
+
 .Post-poster{
     font-size: calc(0.5vh + 0.3vw);
     margin-top: -0.2em;
     margin-left: 0.1em;
     color: rgb(85, 85, 85);
 }
+
 .Post-body{
     margin: 0;
+    margin-top: -0.5vh;
 }

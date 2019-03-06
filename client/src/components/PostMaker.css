@@ -1,10 +1,67 @@
 .Submit-page{
-    
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: #bb9eff;
+}
+
+input[type=radio]{
+    height: 0.5vh;
+    width: 0.5vw;
+    margin: 0.1em;
+    margin-left: 1vw;
 }
 
 .Submit-radio{
     display: flex;
+    margin: auto;
+    align-items: center;
+    width: fit-content;
+    height: 1em;
+    padding-top: 0.3em;
+    font-size: calc(1.5vh + 0.2vw);
 }
 .Submit-form{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: calc(1.5vh + 0.5vw);
+}
+
+.Submit-title{
+    width: 40vw;
+    height: 3vh;
+
+    margin: 0.3em;
+    padding: 0.3em;
+
+    border-radius: 0.5em;
+    border-style: none;
+
+    font-size: inherit;
+}
+
+.Submit-body{
+    padding: 0.3em;
+    min-width: 40vw;
+    max-width: 40vw;
+    height: 10vh;
+    resize: none;
+
+    border-radius: 0.5em;
+    border-style: none;
+
+    font-size: inherit;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.Submit-button{
+    margin: 0.4em;
+    width: 5vw;
+    height: 5vh;
+    position: relative;
+    left: -17.85vw;
+    border-radius: 0.5em;
+    font-size: calc(1vh + 0.3vw);
+    padding: 0.1em;
+    border-style: none;
 }

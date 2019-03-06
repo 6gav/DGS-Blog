@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Home.css';
 
+var admin = false;
+
 class Home extends Component {
     state = {
         postList: null,
@@ -61,10 +63,12 @@ class Home extends Component {
             {
                 console.log('Auth okay!');
                 this.setState({admin: true});
+                admin = true;
             }
         })
     }
 }
+var postList = null;
 
 function UserPosts(props){
     var posts = null;
@@ -72,7 +76,7 @@ function UserPosts(props){
     if(!props.postList){
         return posts;
     }
-    var postList = props.postList;
+    postList = props.postList;
     posts = [];
     for(var i = 0; i < postList.length; i++){
         var component = (

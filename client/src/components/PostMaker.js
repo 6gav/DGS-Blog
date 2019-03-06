@@ -38,9 +38,10 @@ class PostMaker extends Component {
                         </label>
                     </div>
                     <div className='Submit-form'>
-                        <input type='text' onChange={e => this.setState({title: e.target.value})}/>
-                        <input type='text' onChange={e => this.setState({body: e.target.value})}/>
-                        <input type='submit'/>
+                        <input type='text' placeholder='Title' onChange={e => this.setState({title: e.target.value})} className='Submit-title'/>
+                        <textarea placeholder='Body' onChange={e => this.setState({body: e.target.value})} className='Submit-body'/>
+                        <input type='submit' value='Create Post' className='Submit-button'/>
+                    <p style={{color: 'red'}}>{this.state.postError}</p>
                     </div>
                 </form>
             </div>
@@ -71,6 +72,13 @@ class PostMaker extends Component {
 
     SubmitPost(e){
         e.preventDefault();
+
+        if(!this.state.poster || !this.state.body || !this.state.title)
+        {
+            console.log('Unable to post!');
+            this.setState({postError: 'All fields must be filled out!'});
+            return;
+        }
 
         console.log(this.state);
 
