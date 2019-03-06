@@ -15,7 +15,7 @@ const authentication = require('./auth.js')(app);
 
 //Return react app in production
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname + 'client/build/index.html')); 
+    res.sendFile(path.join(__dirname + '/client/build/index.html')); 
 });
 
 app.listen(port, function(){
