@@ -5,22 +5,26 @@ class Home extends Component {
     state = {
         postList: null,
         count: 10,
+        admin: false,
     }
 
     constructor(props){
         super(props);
 
         this.GetPosts = this.GetPosts.bind(this);
+        this.CheckAdmin = this.CheckAdmin.bind(this);
     }
 
     componentDidMount(){
         this.GetPosts();
+        this.CheckAdmin();
     }
 
     render() {
         return (
             <div className='Home'>
-                <a href='/admin/login' style={{opacity: 0, 'font-size': 'calc(1vh + 0.5vw)'}}>Login</a>
+                <a href='/admin/login' style={{opacity: 0, 'fontSize': 'calc(1vh + 0.5vw)'}}>Login</a>
+                <AdminControl auth={this.state.admin}/>
                 <UserPosts postList={this.state.postList}/>
                 <div className='Home-background'></div>
             </div>
@@ -33,6 +37,31 @@ class Home extends Component {
         .then(res => res.json())
         .then(res => {
             this.setState({postList: res.posts});
+        })
+    }
+
+    CheckAdmin(){
+        var auth = localStorage.getItem('authcode');
+        console.log(auth);
+
+        fetch('/api/CheckAdmin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body: JSON.stringify({auth: auth}),
+        })
+        .then(res => res.json())
+        .then(res => {
+            if(res.error !== 0)
+            {
+                return;
+            }
+            else
+            {
+                console.log('Auth okay!');
+                this.setState({admin: true});
+            }
         })
     }
 }
@@ -57,6 +86,17 @@ function UserPosts(props){
     }
 
     return(<div className='Post-list'>{posts}</div>);
+}
+
+function AdminControl(props){
+    var component = null;
+    console.log(props);
+    if(!props.auth){
+        return component;
+    }
+
+    component = (<a href='/admin/CreatePost'>Create Post</a>);
+    return component;
 }
 
 export default Home;

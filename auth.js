@@ -9,5 +9,11 @@ module.exports = function(app){
                 res.send({auth: 293});
             }
         });
-    })
+    });
+
+    app.post('/api/CheckAdmin', (req, res) => {
+        if(req.body.auth == 293){
+            res.send({error: 0});
+        }
+    });
 }
