@@ -21,7 +21,6 @@ class PostMaker extends Component {
     render() {
         return (
             <div className='Submit-page'>
-                <AdminError admin={this.state.admin}/>
                 <form onSubmit={this.SubmitPost}>
                     <div className='Submit-radio'>
                         <label>
@@ -41,6 +40,7 @@ class PostMaker extends Component {
                         <input type='text' placeholder='Title' onChange={e => this.setState({title: e.target.value})} className='Submit-title'/>
                         <textarea placeholder='Body' onChange={e => this.setState({body: e.target.value})} className='Submit-body'/>
                         <input type='submit' value='Create Post' className='Submit-button'/>
+                    <AdminError admin={this.state.admin}/>
                     <p style={{color: 'red'}}>{this.state.postError}</p>
                     </div>
                 </form>
@@ -77,6 +77,10 @@ class PostMaker extends Component {
         {
             console.log('Unable to post!');
             this.setState({postError: 'All fields must be filled out!'});
+            return;
+        }
+
+        if(!this.state.admin){
             return;
         }
 

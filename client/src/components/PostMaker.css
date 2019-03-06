@@ -1,6 +1,7 @@
 .Submit-page{
     min-height: 100vh;
     min-width: 100vw;
+    position: absolute;
     background-color: #bb9eff;
 }
 
