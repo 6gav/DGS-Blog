@@ -8,8 +8,13 @@ fs.readFile("posts.txt", function(err, data){
 
     }
     else{
-        json = JSON.parse(data);
-        console.log(json);
+        var json = [];
+        try {
+            json = JSON.parse(data);
+            
+        } catch (error) {
+
+        }
         postList = json;
     }
 });
