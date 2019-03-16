@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
+import Post from './Post.js';
 
 var admin = false;
 
@@ -32,7 +33,7 @@ class Home extends Component {
             </div>
         );
     }
-
+    
     GetPosts(){
         var url = '/api/GetPosts/count=' + this.state.count;
         fetch(url)
@@ -41,17 +42,16 @@ class Home extends Component {
             this.setState({postList: res.posts});
         })
     }
-
+    
     CheckAdmin(){
         var auth = localStorage.getItem('authcode');
-        console.log(auth);
-
+        
         fetch('/api/CheckAdmin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 },
-            body: JSON.stringify({auth: auth}),
+                body: JSON.stringify({auth: auth}),
         })
         .then(res => res.json())
         .then(res => {
@@ -61,7 +61,6 @@ class Home extends Component {
             }
             else
             {
-                console.log('Auth okay!');
                 this.setState({admin: true});
                 admin = true;
             }
@@ -79,14 +78,8 @@ function UserPosts(props){
     postList = props.postList;
     posts = [];
     for(var i = 0; i < postList.length; i++){
-        var component = (
-        <div key={i} className='Post-holder'>
-            <p className='Post-title'>{postList[i].title}</p>    
-            <p className='Post-poster'>by {postList[i].poster} on {postList[i].date}</p>    
-            <p className='Post-body'>{postList[i].body}</p>    
-        </div>)
+        var component = (<Post key={i} index={i} post={postList[i]}/>)
         posts.push(component);
-        console.log(postList[i]);
     }
 
     return(<div className='Post-list'>{posts}</div>);
@@ -94,12 +87,11 @@ function UserPosts(props){
 
 function AdminControl(props){
     var component = null;
-    console.log(props);
     if(!props.auth){
         return component;
     }
 
-    component = (<a href='/admin/CreatePost'>Create Post</a>);
+    component = (<a href='/admin/CreatePost' className='Create-post'>Create Post</a>);
     return component;
 }
 
