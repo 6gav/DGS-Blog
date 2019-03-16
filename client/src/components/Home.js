@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './Home.css';
 import Post from './Post.js';
 
-var admin = false;
 
 class Home extends Component {
     state = {
@@ -28,7 +27,7 @@ class Home extends Component {
             <div className='Home'>
                 <a href='/admin/login' style={{opacity: 0, 'fontSize': 'calc(1vh + 0.5vw)'}}>Login</a>
                 <AdminControl auth={this.state.admin}/>
-                <UserPosts postList={this.state.postList}/>
+                <UserPosts admin={this.state.admin} postList={this.state.postList}/>
                 <div className='Home-background'></div>
             </div>
         );
@@ -62,7 +61,6 @@ class Home extends Component {
             else
             {
                 this.setState({admin: true});
-                admin = true;
             }
         })
     }
@@ -78,7 +76,7 @@ function UserPosts(props){
     postList = props.postList;
     posts = [];
     for(var i = 0; i < postList.length; i++){
-        var component = (<Post key={i} index={i} post={postList[i]}/>)
+        var component = (<Post key={i} admin={props.admin} index={i} post={postList[i]}/>)
         posts.push(component);
     }
 

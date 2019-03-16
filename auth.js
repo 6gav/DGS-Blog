@@ -1,9 +1,8 @@
 const fs = require('fs');
 
 var authCode = Math.floor(Math.random() * 1000000);
-console.log(authCode);
 
-module.exports = function(app){
+module.exports.registerPaths = function(app){
     app.post('/api/SubmitLogin', (req, res) => {
         fs.readFile('credentials.txt', function(err, data){
             var credentials = JSON.parse(data);
@@ -27,4 +26,10 @@ module.exports = function(app){
             res.send({error: 404});
         }
     });
+}
+
+module.exports.checkCode = function(code){
+    if(code == authCode){
+        return true;
+    }
 }

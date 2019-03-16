@@ -12,17 +12,21 @@ var postList = [];
 var db = admin.database();
 var ref = db.ref("posts");
 ref.once("value", function(snapshot){
-    console.log(snapshot.val());
     if(snapshot.val()){
         postList = snapshot.val()
     }
 });
 
 
+module.exports.editPost = function(info){
+    post = info.post;
+    postList[info.id][post.type] = post.newValue;
+    ref.set(postList);
+    return true;
+}
 
 
-
-module.exports = function(app){
+module.exports.registerPaths = function(app){
     app.get('/api/getPosts/count=:count', (req, res) => {
         var index = req.params.count;
         var spliceList = postList.slice(0, index);
@@ -60,4 +64,6 @@ module.exports = function(app){
         res.send({error: 0});
         ref.set(postList);
     });
+
+    
 }

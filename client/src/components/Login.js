@@ -45,7 +45,7 @@ class Login extends Component {
         .then(res => {
             localStorage.setItem('authcode', res.auth);
             console.log(res);
-            if(res.auth == -1){
+            if(res.auth === -1){
                 this.setState({error: 'Invalid username/password'});
                 return;
             }
